@@ -5,6 +5,17 @@
 @font-face { font-family: Archivo; src: url(fonts/Archivo-Bold.ttf); font-weight: 700; font-display: swap; }
 @font-face { font-family: DDIN; src: url(fonts/D-DINCondensed.otf); font-weight: 400; font-display: swap; }
 @font-face { font-family: DDIN; src: url(fonts/D-DINCondensed-Bold.otf); font-weight: 700; font-display: swap; }
+/* Japanese: the brand faces have no kana or kanji, so those characters come from the system's Japanese gothic */
+@font-face { font-family: DDIN; font-weight: 400; unicode-range: U+3000-30FF, U+3400-9FFF, U+F900-FAFF, U+FF00-FFEF;
+  src: local("HiraginoSans-W5"), local("Hiragino Sans W5"), local("NotoSansJP-Medium"), local("Yu Gothic Medium"), local("Meiryo"); }
+@font-face { font-family: DDIN; font-weight: 700; unicode-range: U+3000-30FF, U+3400-9FFF, U+F900-FAFF, U+FF00-FFEF;
+  src: local("HiraginoSans-W7"), local("Hiragino Sans W7"), local("NotoSansJP-Bold"), local("Yu Gothic Bold"), local("Meiryo Bold"); }
+@font-face { font-family: Archivo; font-weight: 400; unicode-range: U+3000-30FF, U+3400-9FFF, U+F900-FAFF, U+FF00-FFEF;
+  src: local("HiraginoSans-W3"), local("Hiragino Sans W3"), local("NotoSansJP-Regular"), local("Yu Gothic"), local("Meiryo"); }
+@font-face { font-family: Archivo; font-weight: 600; unicode-range: U+3000-30FF, U+3400-9FFF, U+F900-FAFF, U+FF00-FFEF;
+  src: local("HiraginoSans-W6"), local("Hiragino Sans W6"), local("NotoSansJP-SemiBold"), local("Yu Gothic Bold"), local("Meiryo Bold"); }
+@font-face { font-family: Archivo; font-weight: 700; unicode-range: U+3000-30FF, U+3400-9FFF, U+F900-FAFF, U+FF00-FFEF;
+  src: local("HiraginoSans-W7"), local("Hiragino Sans W7"), local("NotoSansJP-Bold"), local("Yu Gothic Bold"), local("Meiryo Bold"); }
 
 :root {
   --orange: #FF6A1A; --pink: #FF2390; --violet: #B026FF; --blue: #2F5BFF; --cyan: #00D8FF;
@@ -32,7 +43,7 @@ a { color: var(--ink); }
 h1, h2, h3 { color: var(--ink); margin: 0; }
 :root[data-theme="light"] .th-dark, :root:not([data-theme="light"]) .th-light { display: none !important; }
 
-.mega { font: 700 clamp(64px, 12.4vw, 236px)/.84 DDIN, Archivo, sans-serif; text-transform: uppercase; letter-spacing: -.005em; color: var(--ink); }
+.mega { font: 700 clamp(57.6px, 11.16vw, 212.4px)/.84 DDIN, Archivo, sans-serif; text-transform: uppercase; letter-spacing: -.005em; color: var(--ink); }
 /* the big type, worn like old print: pitted, scuffed, rough-edged */
 .mega, .card h3, .rel-name, .steps .num { filter: url(#distress); }
 .mega span { display: block; }
@@ -122,32 +133,39 @@ svg.fill .tracer > * { stroke-dasharray: .16 .84; stroke-dashoffset: 1; opacity:
 
 /* section heads */
 .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; padding: 9vw 4vw 3vw; }
-.sec-head .mega { font-size: clamp(56px, 9.5vw, 180px); }
+.sec-head .mega { font-size: clamp(50.4px, 8.55vw, 162px); }
 
 /* cards: the angled renders */
 .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4vw 3vw; padding: 0 4vw 4vw; align-items: start; }
 .card { display: flex; flex-direction: column; gap: 14px; text-decoration: none; }
 .card .shot { position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 16 / 10; background: var(--bg2); }
-/* black-and-white dot-matrix halftone; the clear colour photo on hover */
-.card .shot .ink { position: absolute; inset: 0; z-index: 1; background: var(--plate); transition: opacity .35s;
-                   -webkit-mask: var(--src) center / cover no-repeat; mask: var(--src) center / cover no-repeat; }
-.card .shot img { opacity: 0; transition: opacity .35s; }
+/* the working sketch on planning paper; on hover, the photo in black and white (colour is kept for the plug-in page) */
+.card .shot .plan { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; padding: 4% 5%;
+  background-color: #f3efe2;
+  background-image: linear-gradient(rgba(64,128,170,.34) 1px, transparent 1px), linear-gradient(90deg, rgba(64,128,170,.34) 1px, transparent 1px),
+                    linear-gradient(rgba(64,128,170,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(64,128,170,.15) 1px, transparent 1px);
+  background-size: 60px 60px, 60px 60px, 12px 12px, 12px 12px; background-position: -1px -1px;
+  transition: opacity .35s; }
+:root:not([data-theme="light"]) .card .shot .plan { background-color: #e9e3d2; }
+.card .shot .plan svg.sketch { width: 100%; height: 100%; color: #2b2e36; overflow: hidden; }
+.card .shot .plan svg.sketch .tx { font-size: 15px; }
+.card .shot img { opacity: 0; transition: opacity .35s; filter: grayscale(1) contrast(1.08); }
 .card .shot::before, .card .shot::after { transition: opacity .35s; }
 @media (hover: hover) {
-  .card:hover .shot .ink { opacity: 0; }
+  .card:hover .shot .plan { opacity: 0; }
   .card:hover .shot img { opacity: 1; }
-  .card:hover .shot::before, .card:hover .shot::after { opacity: 0; }
+  .card:hover .shot::after { opacity: 0; }
 }
 .card .shot img { width: 100%; height: 100%; object-fit: cover; }
 /* worn like an old record sleeve: dust, hairline scratches, a vignette */
-.card .shot::before { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), inset 0 0 110px rgba(20,12,4,.55); }
-.card .shot::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: #fffaf0; opacity: .5;
+.card .shot::before { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08), inset 0 0 90px rgba(90,62,20,.32); }
+.card .shot::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: #3a3022; opacity: .28;
   -webkit-mask: url(dust.png) var(--dx, 0) var(--dy, 0) / 760px repeat; mask: url(dust.png) var(--dx, 0) var(--dy, 0) / 760px repeat; }
 .card:nth-child(2n) .shot { --dx: -310px; --dy: -120px; } .card:nth-child(3n) .shot { --dx: -540px; --dy: -400px; }
 .card .meta { display: flex; align-items: center; gap: 10px; font: 700 14px/1 DDIN, Archivo; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); margin-top: 6px; }
 .card .meta .ver { margin-left: auto; color: var(--dim); }
-.card h3 { font: 700 clamp(44px, 5.4vw, 92px)/.86 DDIN; text-transform: uppercase; }
+.card h3 { font: 700 clamp(39.6px, 4.86vw, 82.8px)/.86 DDIN; text-transform: uppercase; }
 .card h3 { background: linear-gradient(var(--ink), var(--ink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .card p { margin: 0; }
 
@@ -188,7 +206,7 @@ svg.fill .tracer > * { stroke-dasharray: .16 .84; stroke-dashoffset: 1; opacity:
 .product .title { padding: 4vw 0 2vw; }
 .product .title .meta { display: flex; align-items: center; gap: 10px; font: 700 14px/1 DDIN, Archivo; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); }
 .product .title .ver { color: var(--dim); }
-.product .mega { font-size: clamp(64px, 11vw, 200px); margin: 16px 0 18px; }
+.product .mega { font-size: clamp(57.6px, 9.9vw, 180px); margin: 16px 0 18px; }
 .product .tag { color: var(--ink); font-size: clamp(19px, 2vw, 26px); max-width: 760px; margin: 0 0 26px; font-weight: 600; line-height: 1.35; }
 .cta { display: flex; flex-wrap: wrap; gap: 12px; }
 .btn { display: inline-block; padding: 14px 22px; border-radius: 999px; background: var(--ink); color: var(--bg); font-weight: 700; text-decoration: none; }
@@ -215,12 +233,32 @@ figcaption { font: 700 13px/1 DDIN, Archivo; letter-spacing: .16em; text-transfo
 .back a { color: var(--ink2); text-decoration: none; font: 700 15px/1 DDIN; letter-spacing: .16em; text-transform: uppercase; }
 
 /* phones and small tablets: the rail becomes a top bar */
+/* the language switch, top right */
+.lang { position: fixed; z-index: 21; top: 18px; right: 22px; padding: 9px 16px 8px; border-radius: 999px; border: 1px solid var(--line);
+        background: color-mix(in srgb, var(--bg) 82%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        color: var(--ink); text-decoration: none; font: 700 14px/1 DDIN, Archivo; letter-spacing: .14em; text-transform: uppercase; transition: border-color .2s; }
+.lang:hover { border-color: var(--ink2); }
+.lang:lang(ja) { letter-spacing: .06em; }
+/* Japanese pages: the titles set smaller and looser (kanji and kana are wide and tall), phrases kept whole */
+:lang(ja) .mega { font-size: clamp(36px, 5.94vw, 111.6px); line-height: 1.1; letter-spacing: 0; }
+:lang(ja) .sec-head .mega { font-size: clamp(36px, 5.94vw, 111.6px); }
+:lang(ja) .product .mega { font-size: clamp(57.6px, 9.9vw, 180px); line-height: .84; }   /* plug-in names stay in Latin, full size */
+@media (max-width: 480px) { :lang(ja) .mega, :lang(ja) .sec-head .mega { font-size: 7.56vw; } :lang(ja) .product .mega { font-size: 13.5vw; } }
+:lang(ja) .steps h3, :lang(ja) .label, :lang(ja) .rail-nav a, :lang(ja) .rail-store, :lang(ja) .meta .kind { letter-spacing: .04em; }
+:lang(ja) p, :lang(ja) li, :lang(ja) h1, :lang(ja) h2, :lang(ja) h3 { word-break: auto-phrase; line-break: strict; }
+:lang(ja) .sheet-lede, :lang(ja) .greats-head p { line-height: 1.45; }
+:lang(ja) .sheet-lede { font-size: clamp(22px, 2.5vw, 40px); }
+:lang(ja) .greats-head p { font-size: clamp(22px, 2.7vw, 44px); }
+/* the rail reads top to bottom, upright, as Japanese is written vertically */
+:lang(ja) .rail-nav a, :lang(ja) .rail-store { transform: none; text-orientation: upright; letter-spacing: .1em; }
+
 @media (max-width: 860px) {
   body { padding-left: 0; padding-top: 58px; }
-  .rail { bottom: auto; right: 0; width: auto; height: 58px; flex-direction: row; padding: 0 16px; gap: 18px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .lang { top: 12px; right: 12px; padding: 9px 12px 8px; font-size: 12px; }
+  .rail { bottom: auto; right: 0; width: auto; height: 58px; flex-direction: row; padding: 0 96px 0 16px; gap: 18px; border-right: 0; border-bottom: 1px solid var(--line); }
   .rail-mark { width: 32px; height: 32px; }
   .rail-nav { flex-direction: row; margin: 0 0 0 auto; gap: 16px; }
-  .rail-nav a, .rail-store { writing-mode: horizontal-tb; transform: none; font-size: 13px; letter-spacing: .12em; }
+  .rail-nav a, .rail-store, :lang(ja) .rail-nav a, :lang(ja) .rail-store { writing-mode: horizontal-tb; transform: none; font-size: 13px; letter-spacing: .12em; }
   .rail-nav a:nth-child(n+2) { display: none; }
   .rail-store { margin: 0; padding: 0; border: 0; }
   .sheet { padding: 20px 16px 48px; }
