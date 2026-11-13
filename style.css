@@ -101,7 +101,7 @@ svg.fill .tracer > * { stroke-dasharray: .16 .84; stroke-dashoffset: 1; opacity:
 .sheet-lockup { text-decoration: none; }
 .sheet-row { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 3vw; align-items: center; min-height: calc(100svh - 120px); }
 .sheet .mega { margin: 0 0 3vh; }
-.sheet .sheet-drawing { width: 100%; }
+.sheet .sheet-drawing { width: 110%; margin-right: -10%; }
 /* the same sizes as the old greats: the .mega headline and its big copy */
 .sheet-lede { color: var(--ink); font-size: clamp(26px, 3.4vw, 56px); line-height: 1.18; font-weight: 600; letter-spacing: -.01em; margin: 0 0 26px; }
 .newest { display: inline-flex; align-items: center; gap: 12px; padding: 12px 18px; border-radius: 999px; text-decoration: none; color: var(--ink);
@@ -138,31 +138,20 @@ svg.fill .tracer > * { stroke-dasharray: .16 .84; stroke-dashoffset: 1; opacity:
 /* cards: the angled renders */
 .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4vw 3vw; padding: 0 4vw 4vw; align-items: start; }
 .card { display: flex; flex-direction: column; gap: 14px; text-decoration: none; }
-.card .shot { position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 16 / 10; background: var(--bg2); }
-/* the working sketch on planning paper; on hover, the photo in black and white (colour is kept for the plug-in page) */
-.card .shot .plan { position: absolute; inset: 0; z-index: 1; display: grid; place-items: center; padding: 4% 5%;
-  background-color: #f3efe2;
-  background-image: linear-gradient(rgba(64,128,170,.34) 1px, transparent 1px), linear-gradient(90deg, rgba(64,128,170,.34) 1px, transparent 1px),
-                    linear-gradient(rgba(64,128,170,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(64,128,170,.15) 1px, transparent 1px);
-  background-size: 60px 60px, 60px 60px, 12px 12px, 12px 12px; background-position: -1px -1px;
-  transition: opacity .35s; }
-:root:not([data-theme="light"]) .card .shot .plan { background-color: #e9e3d2; }
-.card .shot .plan svg.sketch { width: 100%; height: 100%; color: #2b2e36; overflow: hidden; }
-.card .shot .plan svg.sketch .tx { font-size: 15px; }
+.card .shot { position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 16 / 10; background: transparent; }
+/* the working sketch in white line, drawn at the photo's own angle so the two line up; on hover, the photo in
+   black and white (colour is kept for the plug-in page) */
+.card .shot .plan { position: absolute; inset: 0; z-index: 1; transition: opacity .35s; }
+.card .shot .plan svg.sketch { width: 100%; height: 100%; color: #fff; overflow: hidden; }
+:root[data-theme="light"] .card .shot .plan svg.sketch { color: var(--ink); }
+.card .shot .plan svg.sketch path.m { stroke-width: 4.2; }
+.card .shot .plan svg.sketch path.c { stroke-width: 2; }
 .card .shot img { opacity: 0; transition: opacity .35s; filter: grayscale(1) contrast(1.08); }
-.card .shot::before, .card .shot::after { transition: opacity .35s; }
 @media (hover: hover) {
   .card:hover .shot .plan { opacity: 0; }
   .card:hover .shot img { opacity: 1; }
-  .card:hover .shot::after { opacity: 0; }
 }
 .card .shot img { width: 100%; height: 100%; object-fit: cover; }
-/* worn like an old record sleeve: dust, hairline scratches, a vignette */
-.card .shot::before { content: ""; position: absolute; inset: 0; z-index: 2; border-radius: inherit; pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08), inset 0 0 90px rgba(90,62,20,.32); }
-.card .shot::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; background: #3a3022; opacity: .28;
-  -webkit-mask: url(dust.png) var(--dx, 0) var(--dy, 0) / 760px repeat; mask: url(dust.png) var(--dx, 0) var(--dy, 0) / 760px repeat; }
-.card:nth-child(2n) .shot { --dx: -310px; --dy: -120px; } .card:nth-child(3n) .shot { --dx: -540px; --dy: -400px; }
 .card .meta { display: flex; align-items: center; gap: 10px; font: 700 14px/1 DDIN, Archivo; letter-spacing: .16em; text-transform: uppercase; color: var(--ink2); margin-top: 6px; }
 .card .meta .ver { margin-left: auto; color: var(--dim); }
 .card h3 { font: 700 clamp(39.6px, 4.86vw, 82.8px)/.86 DDIN; text-transform: uppercase; }
