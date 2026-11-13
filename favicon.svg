@@ -1,1 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><rect width="16" height="16" rx="3" fill="#242935"/><rect x="3" y="3" width="4" height="10" fill="#dfe5ea"/><rect x="9" y="3" width="4" height="4" fill="#e8a23c"/><rect x="9" y="9" width="4" height="4" fill="#dfe5ea"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+<defs>
+<linearGradient id="fs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF6A1A"/><stop offset=".5" stop-color="#FF2390"/><stop offset="1" stop-color="#B026FF"/></linearGradient>
+<linearGradient id="ft" x1="0" y1="0" x2="1" y2="0"><stop offset=".15" stop-color="#FF6A1A"/><stop offset=".75" stop-color="#FF2390"/></linearGradient>
+<linearGradient id="fb" x1=".1" y1=".05" x2=".95" y2=".6"><stop offset="0" stop-color="#D02BD8"/><stop offset=".35" stop-color="#B026FF"/><stop offset="1" stop-color="#00D8FF"/></linearGradient>
+<linearGradient id="fl" x1="0" y1="0" x2="1" y2="-.4"><stop offset="0" stop-color="#2F5BFF"/><stop offset="1" stop-color="#12B4FF"/></linearGradient>
+<clipPath id="fc"><path d="M13.5 0H50A50 50 0 0 1 50 100H13.5A13.5 13.5 0 0 1 0 86.5V13.5A13.5 13.5 0 0 1 13.5 0ZM27.5 27.5V72.5H50A22.5 22.5 0 0 0 50 27.5Z" clip-rule="evenodd"/></clipPath>
+</defs>
+<circle fill="#2E2F36" cx="86.3" cy="13.7" r="13.7"/><circle fill="#2E2F36" cx="86.3" cy="86.3" r="13.7"/>
+<g clip-path="url(#fc)">
+<rect width="100" height="100" fill="url(#fb)"/>
+<rect x="36" y="72.5" width="70" height="27.5" rx="13.75" fill="url(#fl)"/>
+<rect x="0" y="0" width="64" height="27.5" rx="13.75" fill="url(#ft)"/>
+<rect x="0" y="0" width="27.5" height="100" rx="13.5" fill="url(#fs)"/>
+</g>
+</svg>
