@@ -1,4 +1,4 @@
-# dotmatrixplugins.github.io
+# Dotmatrix website
 
-The public Dotmatrix website. It is generated: don't edit it here. The site is rebuilt from the release folders by
-`build_site.py` (kept with the release tools) and pushed after each release.
+The public Dotmatrix website (https://dotmatrixaudio.com). It is generated: don't edit it here. It is rebuilt from the
+release folders by `ui-update-tools/site/clean.py --publish` and pushed after each release.
