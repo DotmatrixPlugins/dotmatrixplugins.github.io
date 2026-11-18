@@ -47,7 +47,7 @@
   };
   var so = 'IntersectionObserver' in window && !still ? new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { drawSketch(e.target); so.unobserve(e.target); } });
-  }, { threshold: 0.1 }) : null;
+  }, { threshold: 0.35 }) : null;
   document.querySelectorAll('svg.sketch').forEach(function (s) { if (so) so.observe(s); else drawSketch(s); });
 
   document.querySelectorAll('.rv').forEach(function (el) { if (io) io.observe(el); else el.classList.add('in'); });
