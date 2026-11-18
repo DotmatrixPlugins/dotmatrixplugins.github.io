@@ -150,8 +150,9 @@ section[id] { scroll-margin-top: 72px; }
 .round img { border-radius: 50%; }
 .fig.round { background: transparent; box-shadow: none; overflow: visible; }
 
-.vids { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.3fr); gap: 16px; align-items: stretch; }
-.vid { position: relative; border-radius: 16px; overflow: hidden; background: #000; display: block; }
+.vids { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.vid { position: relative; border-radius: 16px; overflow: hidden; background: #000; display: block; aspect-ratio: 16 / 9; }
+.vid video { width: 100%; height: 100%; object-fit: cover; }
 .vid img { width: 100%; height: 100%; object-fit: cover; opacity: .85; transition: opacity .4s, transform 1.4s var(--ease); }
 .vid:hover img { opacity: 1; transform: scale(1.02); }
 .vid .play { position: absolute; left: 20px; bottom: 18px; display: inline-flex; align-items: center; gap: 10px; color: #fff;
