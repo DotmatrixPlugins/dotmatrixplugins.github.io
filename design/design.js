@@ -70,3 +70,15 @@
     addEventListener('keydown', function (e) { if (e.key === 'Escape' && lb.classList.contains('open')) close(); });
   }
 })();
+
+// the website-animation recording plays only while it's on screen, and not at all for reduced motion
+(function () {
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  [].forEach.call(document.querySelectorAll('video[data-autoplay]'), function (v) {
+    if (still) { v.removeAttribute('autoplay'); v.pause(); v.controls = true; return; }
+    if (!('IntersectionObserver' in window)) return;
+    new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function () {}); } else v.pause(); });
+    }, { threshold: 0.2 }).observe(v);
+  });
+})();

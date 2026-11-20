@@ -264,3 +264,12 @@ svg.fill .tracer > * { stroke-dasharray: .16 .84; stroke-dashoffset: 1; opacity:
   .ln > span { transform: none; transition: none; }
   svg.sketch path { stroke-dashoffset: 0; } svg.sketch .tx { opacity: .85; }
 }
+
+/* ---- website animation: a screen recording in a plain browser frame */
+.browser { margin: 0; border-radius: 18px; overflow: hidden; background: #0b0b0d; border: 1px solid var(--line);
+           box-shadow: 0 30px 60px -36px rgba(0,0,0,.55); }
+.browser-bar { display: flex; align-items: center; gap: 7px; height: 38px; padding: 0 16px; background: #141417; border-bottom: 1px solid rgba(255,255,255,.06); }
+.browser-bar i { width: 10px; height: 10px; border-radius: 50%; background: #2c2c32; }
+.browser-bar span { margin: 0 auto; transform: translateX(-24px); font: 500 11px/1 var(--sans); letter-spacing: .04em; color: #77777f; }
+.browser video { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+@media (max-width: 640px) { .browser-bar span { display: none; } }
