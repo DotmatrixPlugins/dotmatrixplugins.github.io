@@ -273,3 +273,16 @@ svg.fill .tracer > * { stroke-dasharray: .16 .84; stroke-dashoffset: 1; opacity:
 .browser-bar span { margin: 0 auto; transform: translateX(-24px); font: 500 11px/1 var(--sans); letter-spacing: .04em; color: #77777f; }
 .browser video { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
 @media (max-width: 640px) { .browser-bar span { display: none; } }
+
+/* YouTube Shorts: a row of vertical players (a sideways rail on phones) */
+.shorts { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
+.short { margin: 0; }
+.short video { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 20px; background: #0b0b0d; }
+.short figcaption { display: flex; align-items: baseline; gap: 10px; margin-top: 14px; font: 500 16px/1.3 var(--sans); letter-spacing: -.02em; }
+.short figcaption span { font: 500 10px/1.5 var(--sans); letter-spacing: .16em; color: var(--faint); }
+@media (max-width: 860px) {
+  .shorts { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62%; overflow-x: auto; scroll-snap-type: x mandatory;
+            margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter) 8px; scrollbar-width: none; }
+  .shorts::-webkit-scrollbar { display: none; }
+  .short { scroll-snap-align: start; }
+}

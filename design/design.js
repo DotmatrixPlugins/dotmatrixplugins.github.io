@@ -82,3 +82,9 @@
     }, { threshold: 0.2 }).observe(v);
   });
 })();
+
+// shorts: only one plays at a time
+(function () {
+  var vs = [].slice.call(document.querySelectorAll('.short video'));
+  vs.forEach(function (v) { v.addEventListener('play', function () { vs.forEach(function (o) { if (o !== v) o.pause(); }); }); });
+})();
