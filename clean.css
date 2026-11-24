@@ -169,6 +169,9 @@ svg.word circle.on { fill: var(--text); }
 .dmark .dot { fill: var(--dmark-dot); }
 .foot-fine { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line); }
 .foot-fine p { font-size: 12px; color: var(--faint); line-height: 1.6; }
+.foot-fine:has(.foot-about) { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; }
+.foot-about { font-size: 12px; color: var(--muted); white-space: nowrap; transition: color .25s; }
+.foot-about:hover { color: var(--text); }
 
 /* ---- product page */
 .prose p { font: 400 18px/1.65 var(--sans); letter-spacing: -.02em; color: var(--muted); margin-bottom: 20px; }
